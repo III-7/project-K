@@ -27,27 +27,29 @@ public class Player : MonoBehaviour {
 	}
 	void movement(){
 		if (Input.GetKey ("d")) {
-			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + 2*speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + speed * (Mathf.Sqrt(2) - 1), this.transform.position.y, this.transform.position.z), Quaternion.identity);
 			if (Input.GetKey ("w")) {
 				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + speed), Quaternion.identity);
-				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 				return;
 			} else if (Input.GetKey ("s")) {
 				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z - speed), Quaternion.identity);
-				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 				return;
 			}
+			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 		} else if (Input.GetKey ("a")) {
-			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - 2*speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - speed * (Mathf.Sqrt(2) - 1), this.transform.position.y, this.transform.position.z), Quaternion.identity);
 			if (Input.GetKey ("w")) {
 				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + speed), Quaternion.identity);
-				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 				return;
 			} else if (Input.GetKey ("s")) {
 				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z - speed), Quaternion.identity);
-				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x + speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
+				this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 				return;
 			}
+			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x - speed, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 		} else if (Input.GetKey ("s")) {
 			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z - 2*speed), Quaternion.identity);
 

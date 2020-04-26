@@ -176,7 +176,6 @@
 -define:UNITY_EDITOR_WIN
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
-Assets/Igrac.cs
 Assets/Player.cs
 -r:"D:\Unity radi\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
 -r:"D:\Unity radi\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
