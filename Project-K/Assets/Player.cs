@@ -7,11 +7,12 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour {
 	UnityEvent keyEvent;
-	float speed = 0.1f;
+	float speed = 0.05f;
 	float targetSpeed;
 	float t = 0.6f;
 	Vector3 lastMousePos;
 	Cam cam;
+	float sensitivityMultiplier = 5.0f;
 	// Use this for initialization
 	void Start () {
 		lastMousePos = Input.mousePosition;
@@ -37,8 +38,8 @@ public class Player : MonoBehaviour {
 	
 	}
 	void updateCam(){
-		cam.transform.SetPositionAndRotation (this.transform.position, Quaternion.identity);
-		cam.transform.eulerAngles = new Vector3(cam.yRotate, cam.xRotate, 0.0f);
+		cam.transform.SetPositionAndRotation (new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z + 0.2f), Quaternion.identity);
+		cam.transform.eulerAngles = new Vector3(cam.yRotate * sensitivityMultiplier, cam.xRotate * sensitivityMultiplier, 0.0f);
 		lastMousePos = Input.mousePosition;
 	}
 	void movement(){
@@ -77,7 +78,5 @@ public class Player : MonoBehaviour {
 		} else if (Input.GetKey ("w")) {
 			this.transform.SetPositionAndRotation (new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z + 2*speed), Quaternion.identity);
 		}
-
-	
 	}
 }
