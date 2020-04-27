@@ -6,16 +6,14 @@ using UnityEngine.Events;
 
 
 public class Player : MonoBehaviour {
-	UnityEvent keyEvent;
-	float speed = 0.05f;
-	float targetSpeed;
-	float t = 0.6f;
-	Vector3 lastMousePos;
-	Cam cam;
-	float sensitivityMultiplier = 5.0f;
+	UnityEvent keyEvent;//is invoked when a key is pressed, right now just calls movement, later will call a higher level function 
+	float speed = 0.05f;//multiplier for number of units a player can move per frame
+	float targetSpeed;//help for acceleration, not implemented correctly yet
+	float t = 0.6f;//lerping multiplier
+	Cam cam; //fps camera that follows the player, rotates with mouse, is child of player object
+	float sensitivityMultiplier = 5.0f;//mouse sensitivity
 	// Use this for initialization
 	void Start () {
-		lastMousePos = Input.mousePosition;
 		//cam  = FindObjectOfType<Camera> ();
 		cam = transform.GetComponentInChildren<Cam> ();
 		targetSpeed = this.speed;
@@ -40,7 +38,6 @@ public class Player : MonoBehaviour {
 	void updateCam(){
 		cam.transform.SetPositionAndRotation (new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z + 0.2f), Quaternion.identity);
 		cam.transform.eulerAngles = new Vector3(cam.yRotate * sensitivityMultiplier, cam.xRotate * sensitivityMultiplier, 0.0f);
-		lastMousePos = Input.mousePosition;
 	}
 	void movement(){
 		this.speed = Mathf.Lerp (0.2f, targetSpeed, t);
