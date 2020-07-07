@@ -14,8 +14,13 @@ public class Player : MonoBehaviour {
 	float sensitivityMultiplier = 4.0f;//mouse sensitivity
 	Vector3 camF = new Vector3();
 	Vector3 camR = new Vector3();
+	Rigidbody rb;
+	float jumpPower = 5f;
+	public bool jumpAllowed = true;
 	// Use this for initialization
 	void Start () {
+		GetComponent<PlayerCollider> ().player = this;
+		rb = GetComponent<Rigidbody> ();
 		cam = transform.GetComponentInChildren<Cam> ();
 		//cam  = FindObjectOfType<Camera> ();
 		camF = cam.transform.forward.normalized;
@@ -29,7 +34,7 @@ public class Player : MonoBehaviour {
 		}
 		keyEvent.AddListener (keyPress);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		updateCam ();
@@ -39,18 +44,20 @@ public class Player : MonoBehaviour {
 		camR.y = 0;
 		Vector2 input = new Vector2 (Input.GetAxis ("Horizontal") * speed, Input.GetAxis ("Vertical") * speed);
 		transform.position += (camF * input.y + camR * input.x);
-	
+
 		//this.transform.rotation = cam.transform.rotation;
 		if (Input.anyKey && keyEvent != null) {
 			keyEvent.Invoke ();
 		}
-	
+
 	}
 	void updateCam(){
 		cam.transform.SetPositionAndRotation (new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z + 0.2f), Quaternion.identity);
 		cam.transform.eulerAngles = new Vector3(cam.yRotate * sensitivityMultiplier, cam.xRotate * sensitivityMultiplier, 0.0f);
 	}
 	void keyPress(){
-		
+		if(Input.GetButtonDown("Jump") && jumpAllowed == true){
+			rb.AddForce(new Vector3(0, jumpPower, 0), ForceMode.Impulse);
+		}
 	}
 }
